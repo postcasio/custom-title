@@ -40,8 +40,10 @@ module.exports =
 					fileName = null
 					filePath = null
 
+				gitHead = atom.project.getRepo()?.getShortHead()
+
 				try
-					title = template {projectPath, fileName, filePath, projectName}
+					title = template {projectPath, projectName, filePath, fileName, gitHead}
 
 					@setTitle(title, filePath)
 				catch e

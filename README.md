@@ -8,5 +8,6 @@ The following variables are available:
 - `projectName`
 - `filePath`
 - `fileName`
+- `gitHead`
 
 Plus the `atom` global, as usual.
