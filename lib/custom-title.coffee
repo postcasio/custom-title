@@ -4,6 +4,8 @@ module.exports =
 	configDefaults:
 		template: '<%= fileName %><% if (projectPath) { %> - <%= projectPath %><% } %>'
 
+	saveSub: null
+
 	activate: (state) ->
 		_ = require 'underscore'
 		{ allowUnsafeNewFunction } = require 'loophole'
@@ -65,10 +67,11 @@ module.exports =
 
 		atom.workspaceView.updateTitle()
 
-		atom.workspaceView.on 'core:save', -> atom.workspaceView.updateTitle()
+		@saveSub = atom.workspaceView.on 'core:save', -> atom.workspaceView.updateTitle()
 
 
 	deactivate: ->
+		@saveSub?.off()
 		atom.workspaceView.updateTitle = _updateTitle
 
 	serialize: ->
