@@ -28,22 +28,34 @@ module.exports =
 
 		atom.workspaceView.updateTitle = ->
 			if template
-				if projectPath = atom.project.getPath()
-					projectName = path.basename(projectPath)
-				else
-					projectName = null
+				projectPath = atom.project.getPath()
+				projectName = if projectPath then path.basename(projectPath) else null
 
-				if item = @getModel().getActivePaneItem()
-					fileName = item.getTitle?() ? 'untitled'
-					filePath = item.getPath?()
-				else
-					fileName = null
-					filePath = null
+				item = @getModel().getActivePaneItem()
 
-				gitHead = atom.project.getRepo()?.getShortHead()
+				fileName = item?.getTitle?() ? 'untitled'
+				filePath = item?.getPath?()
+
+				repo = atom.project.getRepo()
+				gitHead = repo?.getShortHead()
+
+				gitAdded = null
+				gitDeleted = null
+
+				if filePath and repo
+					status = repo.getCachedPathStatus(filePath)
+					if repo.isStatusModified(status)
+						stats = repo.getDiffStats(filePath)
+						gitAdded = stats.added
+						gitDeleted = stats.deleted
+					else if repo.isStatusNew(status)
+						gitAdded = item.getBuffer?().getLineCount()
+						gitDeleted = 0
+					else
+						gitAdded = gitDeleted = 0
 
 				try
-					title = template {projectPath, projectName, filePath, fileName, gitHead}
+					title = template {projectPath, projectName, filePath, fileName, gitHead, gitAdded, gitDeleted}
 
 					@setTitle(title, filePath)
 				catch e
@@ -52,6 +64,8 @@ module.exports =
 				_updateTitle.call(this)
 
 		atom.workspaceView.updateTitle()
+
+		atom.workspaceView.on 'core:save', -> atom.workspaceView.updateTitle()
 
 
 	deactivate: ->
