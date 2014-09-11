@@ -56,8 +56,11 @@ module.exports =
 					else
 						gitAdded = gitDeleted = 0
 
+				if filePath and projectPath
+					relativeFilePath = path.relative(projectPath, filePath)
+
 				try
-					title = template {projectPath, projectName, filePath, fileName, gitHead, gitAdded, gitDeleted}
+					title = template {projectPath, projectName, filePath, relativeFilePath, fileName, gitHead, gitAdded, gitDeleted}
 
 					@setTitle(title, filePath)
 				catch e

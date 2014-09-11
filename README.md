@@ -7,6 +7,7 @@ The following variables are available:
 - `projectPath`
 - `projectName`
 - `filePath`
+- `relativeFilePath`
 - `fileName`
 - `gitHead`
 - `gitAdded`
