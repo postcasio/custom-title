@@ -4,16 +4,25 @@ module.exports =
 	configDefaults:
 		template: '<%= fileName %><% if (projectPath) { %> - <%= projectPath %><% } %>'
 
-	saveSub: null
+	config:
+		template:
+			type: 'string'
+			default: '<%= fileName %><% if (projectPath) { %> - <%= projectPath %><% } %>'
+
+	subscriptions: null
+	configSub: null
 
 	activate: (state) ->
 		_ = require 'underscore'
 		{ allowUnsafeNewFunction } = require 'loophole'
 		path = require 'path'
+		{CompositeDisposable} = require 'event-kit'
+
+		@subscriptions = new CompositeDisposable
 
 		template = null
 
-		atom.config.observe 'custom-title.template', ->
+		@configSub = atom.config.observe 'custom-title.template', ->
 			templateString = atom.config.get('custom-title.template')
 
 			if templateString
@@ -70,11 +79,17 @@ module.exports =
 
 		atom.workspaceView.updateTitle()
 
-		@saveSub = atom.workspaceView.on 'core:save', -> atom.workspaceView.updateTitle()
+		@subscriptions.add atom.workspace.observeTextEditors (editor) =>
+			editorSubscriptions = new CompositeDisposable
+			editorSubscriptions.add editor.onDidSave -> atom.workspaceView.updateTitle()
+			editorSubscriptions.add editor.onDidDestroy -> editorSubscriptions.dispose()
+
+			@subscriptions.add editorSubscriptions
 
 
 	deactivate: ->
-		@saveSub?.off()
+		@subscriptions?.dispose()
+		@configSub?.off()
 		atom.workspaceView.updateTitle = _updateTitle
 
 	serialize: ->

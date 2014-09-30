@@ -9,6 +9,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "event-kit": "^0.7.2",
     "loophole": "^1.0.0",
     "underscore": "^1.6.0"
   }
