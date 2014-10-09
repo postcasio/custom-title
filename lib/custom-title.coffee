@@ -71,7 +71,8 @@ module.exports =
 				try
 					title = template {projectPath, projectName, filePath, relativeFilePath, fileName, gitHead, gitAdded, gitDeleted}
 
-					atom.setRepresentedFilename(filePath ? projectPath)
+					if filePath or projectPath
+						atom.setRepresentedFilename(filePath ? projectPath)
 					document.title = title
 				catch e
 					_updateWindowTitle.call(this)
