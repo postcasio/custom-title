@@ -1,4 +1,4 @@
-_updateTitle = null
+_updateWindowTitle = null
 
 module.exports =
 	configDefaults:
@@ -33,16 +33,16 @@ module.exports =
 			else
 				template = null
 
-			atom.workspaceView.updateTitle()
+			atom.workspace.updateWindowTitle()
 
-		_updateTitle = atom.workspaceView.updateTitle
+		_updateWindowTitle = atom.workspace.updateWindowTitle
 
-		atom.workspaceView.updateTitle = ->
+		atom.workspace.updateWindowTitle = ->
 			if template
 				projectPath = atom.project.getPath()
 				projectName = if projectPath then path.basename(projectPath) else null
 
-				item = @getModel().getActivePaneItem()
+				item = @getActivePaneItem()
 
 				fileName = item?.getTitle?() ? 'untitled'
 				filePath = item?.getPath?()
@@ -71,17 +71,18 @@ module.exports =
 				try
 					title = template {projectPath, projectName, filePath, relativeFilePath, fileName, gitHead, gitAdded, gitDeleted}
 
-					@setTitle(title, filePath)
+					atom.setRepresentedFilename(filePath ? projectPath)
+					document.title = title
 				catch e
-					_updateTitle.call(this)
+					_updateWindowTitle.call(this)
 			else
-				_updateTitle.call(this)
+				_updateWindowTitle.call(this)
 
-		atom.workspaceView.updateTitle()
+		atom.workspace.updateWindowTitle()
 
 		@subscriptions.add atom.workspace.observeTextEditors (editor) =>
 			editorSubscriptions = new CompositeDisposable
-			editorSubscriptions.add editor.onDidSave -> atom.workspaceView.updateTitle()
+			editorSubscriptions.add editor.onDidSave -> atom.workspace.updateWindowTitle()
 			editorSubscriptions.add editor.onDidDestroy -> editorSubscriptions.dispose()
 
 			@subscriptions.add editorSubscriptions
@@ -90,6 +91,6 @@ module.exports =
 	deactivate: ->
 		@subscriptions?.dispose()
 		@configSub?.off()
-		atom.workspaceView.updateTitle = _updateTitle
+		atom.workspace.updateWindowTitle = _updateWindowTitle
 
 	serialize: ->
