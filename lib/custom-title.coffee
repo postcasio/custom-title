@@ -42,7 +42,7 @@ module.exports =
 				projectPath = atom.project.getPath()
 				projectName = if projectPath then path.basename(projectPath) else null
 
-				item = @getActivePaneItem()
+				item = atom.workspace.getActivePaneItem()
 
 				fileName = item?.getTitle?() ? 'untitled'
 				filePath = item?.getPath?()
