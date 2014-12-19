@@ -13,7 +13,7 @@ The following variables are available:
 - `gitAdded`
 - `gitDeleted`
 - `devMode`
-- `safeMode`
+- `safeMode` (always false, since the package will not be loaded in safe mode!)
 
 Plus the `atom` global, as usual.
 
