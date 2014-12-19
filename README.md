@@ -12,6 +12,8 @@ The following variables are available:
 - `gitHead`
 - `gitAdded`
 - `gitDeleted`
+- `devMode`
+- `safeMode`
 
 Plus the `atom` global, as usual.
 

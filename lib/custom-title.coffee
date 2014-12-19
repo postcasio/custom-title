@@ -53,6 +53,9 @@ module.exports =
 				gitAdded = null
 				gitDeleted = null
 
+				devMode = atom.inDevMode()
+				safeMode = atom.inSafeMode?()
+
 				if filePath and repo
 					status = repo.getCachedPathStatus(filePath)
 					if repo.isStatusModified(status)
@@ -69,7 +72,12 @@ module.exports =
 					relativeFilePath = path.relative(projectPath, filePath)
 
 				try
-					title = template {projectPath, projectName, filePath, relativeFilePath, fileName, gitHead, gitAdded, gitDeleted}
+					title = template {
+						projectPath, projectName,
+						filePath, relativeFilePath, fileName,
+						gitHead, gitAdded, gitDeleted
+						devMode, safeMode
+					}
 
 					if filePath or projectPath
 						atom.setRepresentedFilename(filePath ? projectPath)
