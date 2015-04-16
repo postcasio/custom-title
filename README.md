@@ -17,6 +17,8 @@ The following variables are available:
 
 Plus the `atom` global, as usual.
 
+Project and git variables always refer to the first path in your project.
+
 ## Examples
 
 ### Default

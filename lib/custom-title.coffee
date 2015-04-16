@@ -39,7 +39,7 @@ module.exports =
 
 		atom.workspace.updateWindowTitle = ->
 			if template
-				projectPath = atom.project.getPath()
+				projectPath = atom.project.getPaths()[0]
 				projectName = if projectPath then path.basename(projectPath) else null
 
 				item = atom.workspace.getActivePaneItem()
@@ -47,7 +47,7 @@ module.exports =
 				fileName = item?.getTitle?() ? 'untitled'
 				filePath = item?.getPath?()
 
-				repo = atom.project.getRepo()
+				repo = atom.project.getRepositories()[0]
 				gitHead = repo?.getShortHead()
 
 				gitAdded = null
