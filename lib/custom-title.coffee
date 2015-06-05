@@ -46,12 +46,14 @@ module.exports =
 
 				fileName = item?.getTitle?() ? 'untitled'
 				filePath = item?.getPath?()
+				fileInProject = false
 
 				repo = atom.project.getRepositories()[0]
 				gitHead = repo?.getShortHead()
 
 				gitAdded = null
 				gitDeleted = null
+				relativeFilePath = null
 
 				devMode = atom.inDevMode()
 				safeMode = atom.inSafeMode?()
@@ -70,10 +72,13 @@ module.exports =
 
 				if filePath and projectPath
 					relativeFilePath = path.relative(projectPath, filePath)
+					if filePath.startsWith(projectPath)
+						fileInProject = true
 
 				try
+
 					title = template {
-						projectPath, projectName,
+						projectPath, projectName, fileInProject,
 						filePath, relativeFilePath, fileName,
 						gitHead, gitAdded, gitDeleted
 						devMode, safeMode
