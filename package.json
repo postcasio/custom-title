@@ -1,7 +1,7 @@
 {
   "name": "custom-title",
   "main": "./lib/custom-title",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "description": "Set your own template for Atom's title bar.",
   "repository": "https://github.com/postcasio/custom-title",
   "license": "MIT",
