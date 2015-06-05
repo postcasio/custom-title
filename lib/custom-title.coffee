@@ -99,7 +99,7 @@ module.exports =
 
 	deactivate: ->
 		@subscriptions?.dispose()
-		@configSub?.off()
+		@configSub?.dispose()
 		atom.workspace.updateWindowTitle = _updateWindowTitle
 
 	serialize: ->
