@@ -12,5 +12,12 @@
     "event-kit": "^0.7.2",
     "loophole": "^1.0.0",
     "underscore": "^1.6.0"
+  },
+  "consumedServices": {
+    "project-manager": {
+      "versions": {
+        "^2.2.1": "consumeProjectManager"
+      }
+    }
   }
 }

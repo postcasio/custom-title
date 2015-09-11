@@ -11,6 +11,7 @@ module.exports =
 
 	subscriptions: null
 	configSub: null
+	project: null
 
 	activate: (state) ->
 		_ = require 'underscore'
@@ -37,10 +38,12 @@ module.exports =
 
 		_updateWindowTitle = atom.workspace.updateWindowTitle
 
-		atom.workspace.updateWindowTitle = ->
+		atom.workspace.updateWindowTitle = =>
 			if template
 				projectPath = atom.project.getPaths()[0]
 				projectName = if projectPath then path.basename(projectPath) else null
+				if @project
+					projectName = @project.props.title
 
 				item = atom.workspace.getActivePaneItem()
 
@@ -101,6 +104,13 @@ module.exports =
 
 			@subscriptions.add editorSubscriptions
 
+	consumeProjectManager: ({projects}) ->
+		projects.getCurrent (project) =>
+			if project
+				@project = project
+				@project.onUpdate () ->
+					atom.workspace.updateWindowTitle()
+				atom.workspace.updateWindowTitle()
 
 	deactivate: ->
 		@subscriptions?.dispose()
