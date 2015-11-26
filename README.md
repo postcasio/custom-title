@@ -8,6 +8,7 @@ The following variables are available:
 - `projectName`
 - `filePath`
 - `fileInProject`
+- `fileIsModified`
 - `relativeFilePath`
 - `fileName`
 - `gitHead`
