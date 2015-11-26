@@ -47,6 +47,7 @@ module.exports =
 				fileName = item?.getTitle?() ? 'untitled'
 				filePath = item?.getPath?()
 				fileInProject = false
+				fileIsModified = item?.isModified?()
 
 				repo = atom.project.getRepositories()[0]
 				gitHead = repo?.getShortHead()
@@ -81,7 +82,7 @@ module.exports =
 						projectPath, projectName, fileInProject,
 						filePath, relativeFilePath, fileName,
 						gitHead, gitAdded, gitDeleted
-						devMode, safeMode
+						devMode, safeMode, fileIsModified
 					}
 
 					if filePath or projectPath
@@ -97,6 +98,7 @@ module.exports =
 		@subscriptions.add atom.workspace.observeTextEditors (editor) =>
 			editorSubscriptions = new CompositeDisposable
 			editorSubscriptions.add editor.onDidSave -> atom.workspace.updateWindowTitle()
+			editorSubscriptions.add editor.onDidChangeModified -> atom.workspace.updateWindowTitle()
 			editorSubscriptions.add editor.onDidDestroy -> editorSubscriptions.dispose()
 
 			@subscriptions.add editorSubscriptions
