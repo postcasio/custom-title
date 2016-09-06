@@ -104,12 +104,10 @@ module.exports =
 
 			@subscriptions.add editorSubscriptions
 
-	consumeProjectManager: ({projects}) ->
-		projects.getCurrent (project) =>
+	consumeProjectManager: ({getProject}) ->
+		getProject (project) =>
 			if project
 				@project = project
-				@project.onUpdate () ->
-					atom.workspace.updateWindowTitle()
 				atom.workspace.updateWindowTitle()
 
 	deactivate: ->
