@@ -16,7 +16,7 @@
   "consumedServices": {
     "project-manager": {
       "versions": {
-        "^2.2.1": "consumeProjectManager"
+        "^3.1.0": "consumeProjectManager"
       }
     }
   }
