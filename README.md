@@ -41,3 +41,9 @@ The default template matches the regular Atom titlebar:
 ```
 <%= fileName %><% if (projectPath) { %> - <%= projectPath %><% if (gitHead) { %> [<%= gitHead %>]<% } %><% } %>
 ```
+
+### Advanced example with project details
+
+```
+<% if(relativeFilePath) {%><%=relativeFilePath%><%} else {%><%=filePath%><%}%><% if(projectName && fileInProject) {%> - <%=projectName%><%}%><%if(!fileInProject) {%> - Extraneous<%}%>
+```
