@@ -16,6 +16,11 @@ The following variables are available:
 - `devMode`
 - `safeMode` (always false, since the package will not be loaded in safe mode!)
 
+In addition the following variables from `os` is available:
+
+- `username` 
+- `hostname`
+
 Plus the `atom` global, as usual.
 
 Project and git variables always refer to the first path in your project.
@@ -40,4 +45,10 @@ The default template matches the regular Atom titlebar:
 
 ```
 <%= fileName %><% if (projectPath) { %> - <%= projectPath %><% if (gitHead) { %> [<%= gitHead %>]<% } %><% } %>
+```
+
+### With hostname and username
+
+```
+<%= username %> @ <%= hostname %> : <%= fileName %><% if (projectPath) { %> - <%= projectPath %><% if (gitHead) { %> [<%= gitHead %>]<% } %><% } %>
 ```

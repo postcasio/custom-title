@@ -18,6 +18,8 @@ module.exports =
 		path = require 'path'
 		{CompositeDisposable} = require 'event-kit'
 
+		os = require 'os'
+
 		@subscriptions = new CompositeDisposable
 
 		template = null
@@ -58,6 +60,9 @@ module.exports =
 				devMode = atom.inDevMode()
 				safeMode = atom.inSafeMode?()
 
+				hostname = os.hostname()
+				username = os.userInfo().username
+
 				if filePath and repo
 					status = repo.getCachedPathStatus(filePath)
 					if repo.isStatusModified(status)
@@ -81,7 +86,7 @@ module.exports =
 						projectPath, projectName, fileInProject,
 						filePath, relativeFilePath, fileName,
 						gitHead, gitAdded, gitDeleted
-						devMode, safeMode
+						devMode, safeMode, hostname, username
 					}
 
 					if filePath or projectPath
