@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.7.1
+## 1.0.2
 - Forked original project to allow for continued updates.
 
 ## 0.7.0
