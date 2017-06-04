@@ -1,15 +1,17 @@
-# custom-title package
+# custom-window-title package
+
+This was forked from the [custom-title](https://github.com/postcasio/custom-title) package as the owner has stopped updating for quite some time while there are stale bugs.
 
 Set your own template for Atom's title bar. Uses [underscore.js templates](http://underscorejs.org/#template).
 
 The following variables are available:
 
-- `projectPath`
+- `projectPath` (Path to root project directory)
 - `projectName`
-- `filePath`
-- `fileInProject`
-- `relativeFilePath`
-- `fileName`
+- `filePath` (Path to current file)
+- `fileInProject` (Boolean)
+- `relativeFilePath` (Path to file relative to current project)
+- `fileName` (File name)
 - `gitHead`
 - `gitAdded`
 - `gitDeleted`

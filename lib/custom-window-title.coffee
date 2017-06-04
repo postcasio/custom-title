@@ -22,8 +22,8 @@ module.exports =
 
 		template = null
 
-		@configSub = atom.config.observe 'custom-title.template', ->
-			templateString = atom.config.get('custom-title.template')
+		@configSub = atom.config.observe 'custom-window-title.template', ->
+			templateString = atom.config.get('custom-window-title.template')
 
 			if templateString
 				try
