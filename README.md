@@ -24,6 +24,8 @@ Project and git variables always refer to the first path in your project.
 
 ## Examples
 
+These examples can all be tested by going to the package settings and setting the template field.
+
 ### Default
 
 The default template matches the regular Atom titlebar:
