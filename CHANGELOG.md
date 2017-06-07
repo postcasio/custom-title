@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2
+- Forked original project to allow for continued updates.
+
 ## 0.7.0
 - Added `devMode` and `safeMode` booleans.
 

@@ -1,9 +1,9 @@
 {
-  "name": "custom-title",
-  "main": "./lib/custom-title",
-  "version": "1.0.1",
+  "name": "custom-window-title",
+  "main": "./lib/custom-window-title",
+  "version": "1.0.2",
   "description": "Set your own template for Atom's title bar.",
-  "repository": "https://github.com/postcasio/custom-title",
+  "repository": "https://github.com/pixilz/custom-window-title",
   "license": "MIT",
   "engines": {
     "atom": ">0.136.0"
