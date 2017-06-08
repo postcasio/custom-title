@@ -7,7 +7,7 @@ Set your own template for Atom's title bar. Uses [underscore.js templates](http:
 The following variables are available:
 
 - `projectPath` (Path to root project directory)
-- `projectName`
+- `projectName` (Directory name of project or title from [Project Manager](https://atom.io/packages/project-manager))
 - `filePath` (Path to current file)
 - `fileInProject` (Boolean)
 - `relativeFilePath` (Path to file relative to current project)
@@ -20,7 +20,7 @@ The following variables are available:
 
 In addition the following variables from `os` is available:
 
-- `username` 
+- `username`
 - `hostname`
 
 Plus the `atom` global, as usual.
@@ -55,4 +55,10 @@ The default template matches the regular Atom titlebar:
 
 ```
 <%= username %> @ <%= hostname %> : <%= fileName %><% if (projectPath) { %> - <%= projectPath %><% if (gitHead) { %> [<%= gitHead %>]<% } %><% } %>
+```
+
+### Project name display
+
+```
+<% if (projectName) { %> <%= projectName %> <% } %><% if (gitHead) { %> [ ⛕<%= gitHead %> ] <% } %> <%= fileName %><% if (filePath) { %> - <%= filePath %> <% } %>
 ```

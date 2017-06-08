@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+- Added support for projectName to use [Project Manager](https://atom.io/packages/project-manager) title if applicable.
+
+## 1.0.3
+- Added support for username and hostname.
+
 ## 1.0.2
 - Forked original project to allow for continued updates.
 
